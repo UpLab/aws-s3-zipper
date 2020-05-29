@@ -73,6 +73,7 @@ app.all('/', function (request, response) {
         , folderName: 'myBucketFolderName'
         , startKey: 'keyOfLastFileIZipped' // could keep null
         , recursive: true
+        , formatFilename: (name) => name.split('/').reverse()[0]
         }
         ,function (err, result) {
             if(err)

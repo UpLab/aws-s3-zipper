@@ -157,6 +157,7 @@ S3Zipper.prototype = {
          , maxFileCount: an integer that caps off how many files to zip at a time
          , maxFileSize: max total size of files before they are zipped
          , recursive: option to loop through nested folders
+         , formatFilename: optional function to format filenames inside the zip. the input filename is prefixed with S3 path by default
        }
        , callback : function
     */
@@ -193,7 +194,7 @@ S3Zipper.prototype = {
                             else {
                                 console.log('zipping ', name, '...');
 
-                                zip.append(data.Body, {name: name});
+                                zip.append(data.Body, {name: params.formatFilename ? params.formatFilename(name) : name});
                                 callback(null, f);
                             }
 
